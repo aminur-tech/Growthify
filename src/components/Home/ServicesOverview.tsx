@@ -50,8 +50,8 @@ const cardVariants: Variants = {
 
 const ServicesOverview = () => {
   return (
-    <section className="py-24 bg-slate-50 dark:bg-slate-900/50 transition-colors duration-500">
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
+      <div className="w-full md:w-11/12 mx-auto px-4">
         {/* Header Section */}
         <div className="max-w-3xl mx-auto text-center mb-20">
           <motion.h2

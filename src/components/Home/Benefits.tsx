@@ -20,7 +20,7 @@ const Benefits = () => {
 
   return (
     <section ref={containerRef} className="py-32 bg-white dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
-      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-20">
+      <div className="w-full md:w-11/12 mx-auto px-4 flex flex-col lg:flex-row items-center gap-20">
         
         {/* Left Content Column */}
         <div className="flex-1 space-y-8">

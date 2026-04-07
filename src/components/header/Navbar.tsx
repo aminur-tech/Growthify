@@ -8,17 +8,15 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Detect scroll
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Use resolved theme (no mounted needed)
   const currentTheme = resolvedTheme || theme;
 
   const navLinks = [
@@ -30,7 +28,7 @@ const Navbar = () => {
   ];
 
   const linkStyle = ({ isActive }: { isActive: boolean }) =>
-    `relative font-medium transition ${
+    `relative font-medium transition duration-300 ${
       isActive
         ? "text-blue-600 dark:text-blue-400"
         : "text-gray-700 dark:text-gray-300 hover:text-blue-600"
@@ -38,16 +36,16 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 transition ${
+      className={`sticky top-0 z-50 transition-all duration-500 ease-in-out ${
         scrolled
-          ? "bg-white/80 dark:bg-black/70 backdrop-blur shadow"
-          : "bg-transparent"
+          ? "md:top-4 bg-white/80 dark:bg-black/70 backdrop-blur-md shadow-lg md:rounded-full md:max-w-5xl md:mx-auto border border-transparent dark:md:border-gray-800"
+          : "bg-transparent py-2"
       }`}
     >
-      <div className="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+      <div className="flex justify-between items-center px-8 py-4">
         
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-blue-600">
+        <Link to="/" className="text-2xl font-black tracking-tighter text-blue-600">
           Growthify
         </Link>
 
@@ -59,24 +57,20 @@ const Navbar = () => {
             </NavLink>
           ))}
 
+          <div className="h-6 w-px bg-gray-200 dark:bg-gray-800 mx-2" />
+
           {/* Theme Toggle */}
           <button
-            onClick={() =>
-              setTheme(currentTheme === "dark" ? "light" : "dark")
-            }
-            className="p-2 rounded-lg border dark:border-gray-700 hover:scale-105 transition"
+            onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+            className="p-2 rounded-full border border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900 transition-all active:scale-90"
           >
-            {currentTheme === "dark" ? (
-              <Sun size={18} />
-            ) : (
-              <Moon size={18} />
-            )}
+            {currentTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
           {/* CTA */}
           <Link
             to="/contact"
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+            className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30 transition-all active:scale-95"
           >
             Get Started
           </Link>
@@ -84,7 +78,7 @@ const Navbar = () => {
 
         {/* Mobile Button */}
         <button
-          className="md:hidden"
+          className="md:hidden p-2 text-gray-700 dark:text-gray-200"
           onClick={() => setOpen(!open)}
         >
           {open ? <X /> : <Menu />}
@@ -93,41 +87,37 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden px-6 pb-6 space-y-4 bg-white dark:bg-black">
+        <div className="md:hidden px-6 pb-8 pt-4 space-y-4 bg-white dark:bg-black border-t dark:border-gray-900 animate-in fade-in slide-in-from-top-4">
           {navLinks.map((link) => (
             <NavLink
               key={link.name}
               to={link.path}
-              className={linkStyle}
+              className="block text-lg font-semibold text-gray-800 dark:text-gray-200"
               onClick={() => setOpen(false)}
             >
               {link.name}
             </NavLink>
           ))}
-
-          {/* Theme Toggle Mobile */}
-          <button
-            onClick={() =>
-              setTheme(currentTheme === "dark" ? "light" : "dark")
-            }
-            className="flex items-center gap-2"
-          >
-            {currentTheme === "dark" ? (
-              <Sun size={18} />
-            ) : (
-              <Moon size={18} />
-            )}
-            Toggle Theme
-          </button>
-
-          {/* CTA Mobile */}
-          <Link
-            to="/contact"
-            onClick={() => setOpen(false)}
-            className="block text-center bg-blue-600 text-white py-2 rounded-lg"
-          >
-            Get Started
-          </Link>
+          
+          <div className="flex flex-col gap-4 pt-4">
+            <button
+              onClick={() => {
+                setTheme(currentTheme === "dark" ? "light" : "dark");
+                setOpen(false);
+              }}
+              className="flex items-center justify-center gap-2 py-3 border dark:border-gray-800 rounded-xl"
+            >
+              {currentTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+              <span>Switch Theme</span>
+            </button>
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+              className="block text-center bg-blue-600 text-white py-3 rounded-xl font-bold"
+            >
+              Get Started
+            </Link>
+          </div>
         </div>
       )}
     </nav>

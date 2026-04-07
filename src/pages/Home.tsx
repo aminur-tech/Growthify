@@ -14,7 +14,6 @@ const Home = () => (
     <Benefits />
     <Testimonials />
     <CTA />
-   
   </main>
 );
 
