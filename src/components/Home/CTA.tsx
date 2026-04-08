@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
@@ -45,12 +46,16 @@ const CTA = () => {
                 whileTap={{ scale: 0.98 }}
                 className="group flex items-center gap-3 px-10 py-5 bg-white text-blue-600 rounded-2xl font-black text-lg shadow-xl hover:bg-blue-50 transition-all"
               >
+                <Link to="/contact">  
                 Get a Free Consultation
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </motion.button>
               
               <button className="px-10 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl font-bold text-lg hover:bg-white/10 transition-all">
-                View Pricing
+                <Link to="/services">
+                  View Pricing
+                </Link>
               </button>
             </div>
 

@@ -1,6 +1,8 @@
 import { motion, type Variants } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin} from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Contact = () => {
   // 1. Define Animation Variants
@@ -32,6 +34,12 @@ const Contact = () => {
       transition: { duration: 0.8, ease: "backOut" },
     },
   };
+
+  const handleOnSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.success("Message sent successfully! We'll get back to you soon.");
+  };
+
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 pt-32 pb-20 overflow-hidden">
@@ -85,14 +93,20 @@ const Contact = () => {
                  whileTap={{ scale: 0.9 }}
                  className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 text-slate-600 hover:text-blue-600 transition-colors shadow-sm"
                >
+                <Link to="https://www.linkedin.com/in/aminur-rahman4078" target="_blank" rel="noopener noreferrer">
                   <FaLinkedin size={20} />
+                </Link>
+                  
                </motion.button>
+              
                <motion.button 
                  whileHover={{ y: -5 }}
                  whileTap={{ scale: 0.9 }}
                  className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 text-slate-600 hover:text-blue-400 transition-colors shadow-sm"
                >
-                  <FaTwitter size={20} />
+                <Link to="https://github.com/aminur-tech" target="_blank" rel="noopener noreferrer">
+                  <FaGithub size={20} />
+                </Link>
                </motion.button>
             </motion.div>
           </div>
@@ -112,12 +126,13 @@ const Contact = () => {
               className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full" 
             />
             
-            <form className="space-y-6 relative z-10">
+            <form onSubmit={handleOnSubmit} className="space-y-6 relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="input-field space-y-2">
                   <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Your Name</label>
                   <input 
                     type="text" 
+                    required
                     placeholder="John Doe"
                     className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white"
                   />
@@ -126,6 +141,7 @@ const Contact = () => {
                   <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Email Address</label>
                   <input 
                     type="email" 
+                    required
                     placeholder="john@example.com"
                     className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white"
                   />
@@ -146,6 +162,7 @@ const Contact = () => {
                 <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Message</label>
                 <textarea 
                   rows={4}
+                  required
                   placeholder="Tell us about your project goals..."
                   className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white resize-none"
                 />

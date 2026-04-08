@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import LanguageToggle from "../button/LanguageToggle";
 
 const Navbar = () => {
   const { theme, resolvedTheme, setTheme } = useTheme();
@@ -35,17 +36,16 @@ const Navbar = () => {
           borderRadius: scrolled ? "100px" : "0px",
           marginTop: scrolled ? "10px" : "0px",
         }}
-        className={`pointer-events-auto flex flex-col transition-all duration-500 border-b md:border ${
-          scrolled
+        className={`pointer-events-auto flex flex-col transition-all duration-500 border-b md:border ${scrolled
             ? "bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-slate-200 dark:border-slate-800 shadow-2xl shadow-blue-500/10"
             : "bg-transparent border-transparent"
-        }`}
+          }`}
       >
         <div className="flex justify-between items-center px-6 md:px-8 py-3">
-          
+
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-1">
-            <img src="/logo.png" alt=""  className="w-12 h-12"/>
+            <img src="/logo.png" alt="" className="w-12 h-12" />
             <span className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
               Growthify
             </span>
@@ -59,10 +59,9 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={({ isActive }) =>
-                    `relative px-4 py-2 text-sm font-bold rounded-full transition-all duration-300 ${
-                      isActive
-                        ? "text-white"
-                        : "text-slate-600 dark:text-slate-400 hover:text-blue-600"
+                    `relative px-4 py-2 text-sm font-bold rounded-full transition-all duration-300 ${isActive
+                      ? "text-white"
+                      : "text-slate-600 dark:text-slate-400 hover:text-blue-600"
                     }`
                   }
                 >
@@ -84,6 +83,8 @@ const Navbar = () => {
 
             <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 mx-2" />
 
+            <LanguageToggle />
+
             {/* Theme Toggle */}
             <motion.button
               whileTap={{ scale: 0.9 }}
@@ -103,12 +104,16 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Button */}
-          <button
-            className="md:hidden p-2 text-slate-900 dark:text-white"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className=" md:hidden flex items-center gap-4">
+            <LanguageToggle />
+            <button
+              className=" p-2 text-slate-900 dark:text-white"
+              onClick={() => setOpen(!open)}
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+
         </div>
 
         {/* Mobile Menu with AnimatePresence */}
@@ -138,6 +143,7 @@ const Navbar = () => {
                   </motion.div>
                 ))}
                 <div className="h-px bg-slate-100 dark:border-slate-800 my-2" />
+
                 <button
                   onClick={() => {
                     setTheme(currentTheme === "dark" ? "light" : "dark");

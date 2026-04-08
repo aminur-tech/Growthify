@@ -18,12 +18,13 @@
 
 | Tool | Usage |
 | :--- | :--- |
-| **React 18** | Core UI Architecture |
+| **React 19** | Core UI Architecture |
 | **Tailwind CSS** | Styling & Dark Mode Sensitivity |
 | **GSAP** | Scroll-based high-performance animations |
 | **Lenis** | Smooth scrolling engine |
 | **Lucide React** | Consistent, minimalist iconography |
 | **Framer Motion** | Micro-interactions and page transitions |
+| 
 
 ## 🚀 Getting Started
 

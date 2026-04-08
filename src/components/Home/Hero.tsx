@@ -1,4 +1,5 @@
 import { motion, type Variants} from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   // Variants for staggered entrance
@@ -69,7 +70,9 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               className="px-10 py-4 bg-blue-600 text-white rounded-2xl font-bold hover:bg-blue-700 transition-all shadow-xl shadow-blue-200 dark:shadow-blue-900/20"
             >
-              Get a Free Consultation
+              <Link to="/contact">
+                Get a Free Consultation
+              </Link>
             </motion.button>
             
             <motion.button 
@@ -77,7 +80,9 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               className="px-10 py-4 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 rounded-2xl font-bold hover:bg-slate-50 dark:hover:bg-slate-900 transition-all backdrop-blur-sm"
             >
-              View Our Work
+              <Link to="/services">
+                View Our Services
+              </Link>
             </motion.button>
           </motion.div>
         </motion.div>

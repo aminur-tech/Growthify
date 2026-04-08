@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Code, 
-  BarChart3, 
-  CalendarCheck, 
-  Check, 
-  Zap, 
+import {
+  Code,
+  BarChart3,
+  CalendarCheck,
+  Check,
+  Zap,
   ArrowRight,
-  Search
+  Search,
+  
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 
 const Services = () => {
@@ -71,7 +73,7 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 pt-20">
-      
+
       {/* 1. Hero Section */}
       <section className="container mx-auto px-6 py-20 text-center">
         <motion.div
@@ -87,7 +89,7 @@ const Services = () => {
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">Hyper-Growth.</span>
         </h1>
         <p className="text-lg text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          We combine cutting-edge engineering with psychological triggers to build 
+          We combine cutting-edge engineering with psychological triggers to build
           platforms that don't just look good—they convert.
         </p>
       </section>
@@ -126,15 +128,15 @@ const Services = () => {
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Simple, Scalable Pricing</h2>
-            
+
             {/* Toggle */}
             <div className="flex items-center justify-center gap-4 mt-8">
               <span className={`text-sm font-bold ${billingCycle === 'monthly' ? 'text-blue-600' : 'text-slate-400'}`}>Monthly</span>
-              <button 
+              <button
                 onClick={() => setBillingCycle(prev => prev === 'monthly' ? 'yearly' : 'monthly')}
                 className="w-14 h-8 bg-slate-200 dark:bg-slate-800 rounded-full p-1 transition-colors relative"
               >
-                <motion.div 
+                <motion.div
                   animate={{ x: billingCycle === 'monthly' ? 0 : 24 }}
                   className="w-6 h-6 bg-blue-600 rounded-full shadow-md"
                 />
@@ -147,13 +149,12 @@ const Services = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {pricing.map((plan, idx) => (
-              <div 
+              <div
                 key={idx}
-                className={`relative p-10 rounded-[3rem] border transition-all duration-500 ${
-                  plan.highlight 
-                  ? 'bg-slate-900 dark:bg-blue-600 border-transparent shadow-2xl scale-105 z-10' 
-                  : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800'
-                }`}
+                className={`relative p-10 rounded-[3rem] border transition-all duration-500 ${plan.highlight
+                    ? 'bg-slate-900 dark:bg-blue-600 border-transparent shadow-2xl scale-105 z-10'
+                    : 'bg-white dark:bg-slate-900 border-slate-100 dark:border-slate-800'
+                  }`}
               >
                 {plan.highlight && (
                   <div className="absolute top-0 right-10 -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full shadow-lg">
@@ -184,11 +185,10 @@ const Services = () => {
                     </li>
                   ))}
                 </ul>
-                <button className={`w-full py-4 rounded-2xl font-bold transition-all ${
-                  plan.highlight 
-                  ? 'bg-white text-blue-600 hover:scale-[1.02]' 
-                  : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800'
-                }`}>
+                <button className={`w-full py-4 rounded-2xl font-bold transition-all ${plan.highlight
+                    ? 'bg-white text-blue-600 hover:scale-[1.02]'
+                    : 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800'
+                  }`}>
                   Choose {plan.name}
                 </button>
               </div>
@@ -200,18 +200,23 @@ const Services = () => {
       {/* 4. Contact/CTA Section */}
       <section className="container mx-auto px-6 py-24">
         <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden">
-           <div className="relative z-10">
-             <h2 className="text-4xl md:text-5xl font-black text-white mb-8">Ready to build something <br/> extraordinary?</h2>
-             <p className="text-blue-100 mb-10 max-w-xl mx-auto opacity-80">
-               Schedule a free 15-minute consultation with our lead engineers and growth strategists.
-             </p>
-             <button className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-2xl font-bold hover:gap-5 transition-all">
-               Book My Free Call
-               <ArrowRight />
-             </button>
-           </div>
-           {/* Abstract Circle Background */}
-           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
+          <div className="relative z-10">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-8">Ready to build something <br /> extraordinary?</h2>
+            <p className="text-blue-100 mb-10 max-w-xl mx-auto opacity-80">
+              Schedule a free 15-minute consultation with our lead engineers and growth strategists.
+            </p>
+
+
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-2xl font-bold hover:gap-5 transition-all shadow-lg hover:shadow-white/20 active:scale-95"
+            >
+              Get a Free Consultation
+              <ArrowRight className="transition-all" />
+            </Link>
+          </div>
+          {/* Abstract Circle Background */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
         </div>
       </section>
 
