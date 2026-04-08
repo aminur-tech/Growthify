@@ -1,75 +1,34 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## 📖 Introduction
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Growthify** is a premium agency landing page designed for high-performance digital engineering firms. This project focuses on **advanced motion design**, **smooth scroll physics**, and a highly polished **Dark Mode** experience.
 
-## React Compiler
+[View Demo](https://growthify-fawn.vercel.app) 
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## ✨ Key Features
 
-Note: This will impact Vite dev & build performances.
+- 🌑 **Adaptive Dark Mode**: Fully optimized for `next-themes` with smooth transitions.
+- 🌊 **Inertial Smooth Scroll**: Powered by **Lenis** for a high-end, buttery feel.
+- 🎭 **Staggered Animations**: Professional component entrances using **Framer Motion**.
+- 📍 **Scroll-Triggered UI**: Dynamic Navbar that morphs into a floating capsule on scroll.
+- 📱 **Mobile First**: Fully responsive layouts using Tailwind's flexible grid system.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Tool | Usage |
+| :--- | :--- |
+| **React 18** | Core UI Architecture |
+| **Tailwind CSS** | Styling & Dark Mode Sensitivity |
+| **GSAP** | Scroll-based high-performance animations |
+| **Lenis** | Smooth scrolling engine |
+| **Lucide React** | Consistent, minimalist iconography |
+| **Framer Motion** | Micro-interactions and page transitions |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. **Clone the repo**
+   ```bash
+   git clone [https://github.com/aminur-tech/growthify.git](https://github.com/aminur-tech/growthify.git)

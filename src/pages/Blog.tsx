@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import  { useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -56,38 +56,13 @@ const Blog = () => {
     }
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Reveal header
-      gsap.from(".blog-header", {
-        y: 40,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      });
-
-      // Staggered post reveal
-      gsap.from(".post-card", {
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-        y: 60,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 1,
-        ease: "power4.out"
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+ 
 
   return (
     <div ref={containerRef} className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 pt-28 pb-20">
       
       {/* 1. Header Section */}
-      <header className="container mx-auto px-6 mb-16 text-center lg:text-left blog-header">
+      <header className="w-full md:w-11/12 mx-auto px-6 mb-16 text-center lg:text-left blog-header">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="max-w-2xl">
             <h1 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
@@ -108,7 +83,7 @@ const Blog = () => {
       </header>
 
       {/* 2. Blog Grid */}
-      <section className="container mx-auto px-6">
+      <section className="w-full md:w-11/12 mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
           
           {posts.map((post) => (

@@ -1,4 +1,3 @@
-
 import { motion, type Variants } from 'framer-motion';
 import { Rocket, Award, Users, CheckCircle, Quote } from 'lucide-react';
 
