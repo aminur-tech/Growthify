@@ -4,20 +4,19 @@ import {
   Layers, 
   Zap, 
   Shield, 
-  Globe, 
-  MessageSquare, 
-  Hexagon,       
-  Frame,        
-  Home 
+  Globe,               
 } from "lucide-react";
+import { FaChrome, FaTwitter, FaFigma, FaSlack} from "react-icons/fa";
+import { LuSigma } from "react-icons/lu";
+
 
 const Partners = () => {
   const logos = [
-    { icon: <MessageSquare className="w-full h-full" />, name: "Slack" },
-    { icon: <Hexagon className="w-full h-full" />, name: "Sigma" },
-    { icon: <Frame className="w-full h-full" />, name: "Figma" },
-    { icon: <Home className="w-full h-full" />, name: "Chrome" },
-    { icon: <MessageSquare className="w-full h-full" />, name: "Twitter" },
+    { icon: <FaSlack className="w-full h-full" />, name: "Slack" },
+    { icon: <LuSigma className="w-full h-full" />, name: "Sigma" },
+    { icon: <FaFigma className="w-full h-full" />, name: "Figma" },
+    { icon: <FaChrome className="w-full h-full" />, name: "Chrome" },
+    { icon: <FaTwitter className="w-full h-full" />, name: "Twitter" },
     { icon: <Cpu className="w-full h-full" />, name: "Intel" },
     { icon: <Layers className="w-full h-full" />, name: "Stack" },
     { icon: <Zap className="w-full h-full" />, name: "Fastly" },
