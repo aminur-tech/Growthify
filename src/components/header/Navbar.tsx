@@ -3,9 +3,11 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTranslation } from "react-i18next"; // 1. Import hook
 import LanguageToggle from "../button/LanguageToggle";
 
 const Navbar = () => {
+  const { t } = useTranslation(); // 2. Initialize translation
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -18,12 +20,13 @@ const Navbar = () => {
 
   const currentTheme = resolvedTheme || theme;
 
+  // 3. Map names to translation keys
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Services", path: "/services" },
-    { name: "About", path: "/about" },
-    { name: "Blog", path: "/blog" },
-    { name: "Contact", path: "/contact" },
+    { name: t('navbar.home'), path: "/" },
+    { name: t('navbar.services'), path: "/services" },
+    { name: t('navbar.about'), path: "/about" },
+    { name: t('navbar.blog'), path: "/blog" },
+    { name: t('navbar.contact'), path: "/contact" },
   ];
 
   return (
@@ -36,13 +39,14 @@ const Navbar = () => {
           borderRadius: scrolled ? "100px" : "0px",
           marginTop: scrolled ? "10px" : "0px",
         }}
-        className={`pointer-events-auto flex flex-col transition-all duration-500 border-b md:border ${scrolled
+        className={`pointer-events-auto flex flex-col transition-all duration-500 border-b md:border ${
+          scrolled
             ? "bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-slate-200 dark:border-slate-800 shadow-2xl shadow-blue-500/10"
             : "bg-transparent border-transparent"
-          }`}
+        }`}
       >
         <div className="flex justify-between items-center px-6 md:px-8 py-3">
-
+          
           {/* Logo */}
           <Link to="/" className="group flex items-center gap-1">
             <img src="/logo.png" alt="" className="w-12 h-12" />
@@ -56,12 +60,13 @@ const Navbar = () => {
             <div className="flex items-center gap-1 bg-slate-100/50 dark:bg-slate-800/50 p-1 rounded-full border border-slate-200/50 dark:border-slate-700/50">
               {navLinks.map((link) => (
                 <NavLink
-                  key={link.name}
+                  key={link.path}
                   to={link.path}
                   className={({ isActive }) =>
-                    `relative px-4 py-2 text-sm font-bold rounded-full transition-all duration-300 ${isActive
-                      ? "text-white"
-                      : "text-slate-600 dark:text-slate-400 hover:text-blue-600"
+                    `relative px-4 py-2 text-sm font-bold rounded-full transition-all duration-300 ${
+                      isActive
+                        ? "text-white"
+                        : "text-slate-600 dark:text-slate-400 hover:text-blue-600"
                     }`
                   }
                 >
@@ -99,24 +104,23 @@ const Navbar = () => {
               to="/contact"
               className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/40 transition-all active:scale-95"
             >
-              Start Project
+              {t('navbar.cta')}
             </Link>
           </div>
 
           {/* Mobile Button */}
-          <div className=" md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-4">
             <LanguageToggle />
             <button
-              className=" p-2 text-slate-900 dark:text-white"
+              className="p-2 text-slate-900 dark:text-white"
               onClick={() => setOpen(!open)}
             >
               {open ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
-
         </div>
 
-        {/* Mobile Menu with AnimatePresence */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {open && (
             <motion.div
@@ -131,7 +135,7 @@ const Navbar = () => {
                     initial={{ x: -20, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ delay: i * 0.1 }}
-                    key={link.name}
+                    key={link.path}
                   >
                     <NavLink
                       to={link.path}
@@ -151,7 +155,7 @@ const Navbar = () => {
                   }}
                   className="flex items-center justify-between w-full p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl"
                 >
-                  <span className="font-bold">Appearance</span>
+                  <span className="font-bold">{t('navbar.appearance')}</span>
                   {currentTheme === "dark" ? <Sun /> : <Moon />}
                 </button>
               </div>

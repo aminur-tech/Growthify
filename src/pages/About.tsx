@@ -1,8 +1,10 @@
 import { motion, type Variants } from 'framer-motion';
 import { Rocket, Award, Users, CheckCircle, Quote } from 'lucide-react';
+import { useTranslation } from "react-i18next";
 
 const About = () => {
-  // Animation Variants
+  const { t } = useTranslation();
+
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 40 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
@@ -19,7 +21,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-500">
       
-      {/* 1. Hero Section: Vision & Expertise */}
+      {/* 1. Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-50/50 dark:from-blue-900/10 to-transparent -z-10" />
         
@@ -32,19 +34,19 @@ const About = () => {
             className="text-center space-y-6"
           >
             <motion.span variants={fadeInUp} className="px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-bold tracking-widest uppercase">
-              Our Vision
+              {t('about.vision_badge')}
             </motion.span>
             <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-black tracking-tight">
-              Engineering the <span className="text-blue-600">Digital Future.</span>
+              {t('about.hero_title')} <span className="text-blue-600">{t('about.hero_highlight')}</span>
             </motion.h1>
             <motion.p variants={fadeInUp} className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
-              We don't just build software; we craft digital experiences that scale. Our expertise lies at the intersection of high-performance engineering and human-centric design.
+              {t('about.hero_desc')}
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* 2. Stats Section: Success Metrics */}
+      {/* 2. Stats Section */}
       <section className="py-20 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-100 dark:border-slate-800">
         <div className="container mx-auto px-6">
           <motion.div 
@@ -55,10 +57,10 @@ const About = () => {
             className="grid grid-cols-2 lg:grid-cols-4 gap-8"
           >
             {[
-              { label: "Projects Delivered", value: "250+", icon: <Rocket /> },
-              { label: "Client Satisfaction", value: "99%", icon: <CheckCircle /> },
-              { label: "Active Users", value: "1.2M", icon: <Users /> },
-              { label: "Global Awards", value: "12", icon: <Award /> },
+              { label: t('about.stat_projects'), value: "250+", icon: <Rocket /> },
+              { label: t('about.stat_satisfaction'), value: "99%", icon: <CheckCircle /> },
+              { label: t('about.stat_users'), value: "1.2M", icon: <Users /> },
+              { label: t('about.stat_awards'), value: "12", icon: <Award /> },
             ].map((stat, i) => (
               <motion.div key={i} variants={fadeInUp} className="text-center space-y-2">
                 <div className="flex justify-center text-blue-600 mb-2">{stat.icon}</div>
@@ -70,7 +72,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* 3. Strategy & Awards */}
+      {/* 3. Strategy Section */}
       <section className="py-24 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -89,12 +91,12 @@ const About = () => {
             </motion.div>
 
             <div className="space-y-8">
-              <h2 className="text-4xl font-bold">Driven by Strategy, <br />Proven by Results</h2>
+              <h2 className="text-4xl font-bold">{t('about.strategy_title')} <br />{t('about.strategy_subtitle')}</h2>
               <div className="space-y-6">
                 {[
-                  { title: "Innovation First", desc: "We utilize cutting-edge stacks like Next.js and AI integration." },
-                  { title: "Scalable Architecture", desc: "Systems built to handle millions of requests without breaking." },
-                  { title: "User-Centric Design", desc: "If the user can't use it, it doesn't matter how fast it is." }
+                  { title: t('about.feat_innov_title'), desc: t('about.feat_innov_desc') },
+                  { title: t('about.feat_arch_title'), desc: t('about.feat_arch_desc') },
+                  { title: t('about.feat_user_title'), desc: t('about.feat_user_desc') }
                 ].map((item, i) => (
                   <motion.div 
                     initial={{ opacity: 0, x: 20 }}
@@ -118,10 +120,10 @@ const About = () => {
         </div>
       </section>
 
-      {/* 4. Testimonials (Glassmorphism) */}
+      {/* 4. Testimonials */}
       <section className="py-24 px-6 bg-slate-50 dark:bg-slate-900/30">
         <div className="container mx-auto max-w-6xl text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">What Our Partners Say</h2>
+          <h2 className="text-4xl font-bold mb-4">{t('about.testimonial_title')}</h2>
           <div className="h-1.5 w-20 bg-blue-600 mx-auto rounded-full" />
         </div>
 
@@ -134,7 +136,7 @@ const About = () => {
             >
               <Quote className="absolute top-6 right-8 text-blue-600/20" size={40} />
               <p className="text-slate-600 dark:text-slate-300 mb-8 italic">
-                "Growthify transformed our workflow entirely. Their engineering team is top-tier and they delivered ahead of schedule."
+                "{t('about.testimonial_text')}"
               </p>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden" />

@@ -1,17 +1,19 @@
 import { motion, type Variants } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { FaGithub, FaLinkedin} from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from "react-i18next"; // 1. Import
 
 const Contact = () => {
-  // 1. Define Animation Variants
+  const { t } = useTranslation(); // 2. Initialize
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Time between each child's animation
+        staggerChildren: 0.2,
         delayChildren: 0.3,
       },
     },
@@ -37,9 +39,8 @@ const Contact = () => {
 
   const handleOnSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Message sent successfully! We'll get back to you soon.");
+    toast.success(t('contact.toast_success')); // 3. Translated Toast
   };
-
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500 pt-32 pb-20 overflow-hidden">
@@ -47,33 +48,32 @@ const Contact = () => {
         className="container mx-auto px-6"
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible" // Animation triggers on scroll
+        whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           
-          {/* 1. Contact Info Card */}
           <div className="contact-info space-y-8">
             <motion.div variants={itemVariants}>
               <h1 className="text-5xl md:text-6xl font-black text-slate-900 dark:text-white mb-6 tracking-tight">
-                Let's Build <br />
-                <span className="text-blue-600">Something Big.</span>
+                {t('contact.title_line1')} <br />
+                <span className="text-blue-600">{t('contact.title_highlight')}</span>
               </h1>
               <p className="text-lg text-slate-500 dark:text-slate-400 max-w-md leading-relaxed">
-                Have a project in mind? We're ready to help you scale your digital presence with high-performance engineering.
+                {t('contact.description')}
               </p>
             </motion.div>
 
             <div className="space-y-6">
               {[
-                { icon: <Mail className="text-blue-500" />, label: "Email us", value: "aminur.programme@gmail.com" },
-                { icon: <Phone className="text-emerald-500" />, label: "Call us", value: "+880 1327694078" },
-                { icon: <MapPin className="text-rose-500" />, label: "Office", value: "Satkhira, Bangladesh" }
+                { icon: <Mail className="text-blue-500" />, label: t('contact.label_email'), value: "aminur.programme@gmail.com" },
+                { icon: <Phone className="text-emerald-500" />, label: t('contact.label_call'), value: "+880 1327694078" },
+                { icon: <MapPin className="text-rose-500" />, label: t('contact.label_office'), value: t('contact.office_value') }
               ].map((item, i) => (
                 <motion.div 
                   key={i} 
                   variants={itemVariants}
-                  whileHover={{ x: 10 }} // Subtle interaction on hover
+                  whileHover={{ x: 10 }}
                   className="flex items-center gap-4 p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                 >
                   <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-xl">
@@ -96,7 +96,6 @@ const Contact = () => {
                 <Link to="https://www.linkedin.com/in/aminur-rahman4078" target="_blank" rel="noopener noreferrer">
                   <FaLinkedin size={20} />
                 </Link>
-                  
                </motion.button>
               
                <motion.button 
@@ -111,12 +110,10 @@ const Contact = () => {
             </motion.div>
           </div>
 
-          {/* 2. Modern Form */}
           <motion.div 
             variants={formVariants}
             className="contact-form bg-white dark:bg-slate-900 p-8 md:p-12 rounded-[3rem] border border-slate-100 dark:border-slate-800 shadow-2xl relative overflow-hidden"
           >
-            {/* Animated background glow */}
             <motion.div 
               animate={{ 
                 scale: [1, 1.2, 1],
@@ -129,41 +126,41 @@ const Contact = () => {
             <form onSubmit={handleOnSubmit} className="space-y-6 relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="input-field space-y-2">
-                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Your Name</label>
+                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">{t('contact.form_name')}</label>
                   <input 
                     type="text" 
                     required
-                    placeholder="John Doe"
+                    placeholder={t('contact.placeholder_name')}
                     className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white"
                   />
                 </div>
                 <div className="input-field space-y-2">
-                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Email Address</label>
+                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">{t('contact.form_email')}</label>
                   <input 
                     type="email" 
                     required
-                    placeholder="john@example.com"
+                    placeholder={t('contact.placeholder_email')}
                     className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white"
                   />
                 </div>
               </div>
 
               <div className="input-field space-y-2">
-                <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Service Required</label>
+                <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">{t('contact.form_service')}</label>
                 <select className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white appearance-none">
-                  <option>Web Development</option>
-                  <option>SEO Optimization</option>
-                  <option>UI/UX Design</option>
-                  <option>Full Scale Marketing</option>
+                  <option>{t('contact.service_web')}</option>
+                  <option>{t('contact.service_seo')}</option>
+                  <option>{t('contact.service_ui')}</option>
+                  <option>{t('contact.service_marketing')}</option>
                 </select>
               </div>
 
               <div className="input-field space-y-2">
-                <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">Message</label>
+                <label className="text-sm font-bold text-slate-700 dark:text-slate-300 ml-1">{t('contact.form_message')}</label>
                 <textarea 
                   rows={4}
                   required
-                  placeholder="Tell us about your project goals..."
+                  placeholder={t('contact.placeholder_message')}
                   className="w-full px-6 py-4 bg-slate-50 dark:bg-slate-800 border-none rounded-2xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white resize-none"
                 />
               </div>
@@ -173,7 +170,7 @@ const Contact = () => {
                 whileTap={{ scale: 0.98 }}
                 className="w-full py-5 bg-blue-600 text-white rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-500/20 transition-all"
               >
-                Send Proposal
+                {t('contact.btn_send')}
                 <Send size={20} />
               </motion.button>
             </form>

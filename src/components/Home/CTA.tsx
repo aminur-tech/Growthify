@@ -1,10 +1,14 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowLeft, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CTA = () => {
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.dir() === 'rtl';
+
   return (
-    <section className="py-20 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
+    <section className="py-20 px-4 bg-slate-50 dark:bg-slate-950 transition-colors duration-500 overflow-hidden">
       <div className="container mx-auto max-w-6xl">
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
@@ -15,8 +19,8 @@ const CTA = () => {
         >
           {/* Decorative Background Elements */}
           <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
+            <div className={`absolute -top-24 ${isRtl ? '-right-24' : '-left-24'} w-96 h-96 bg-blue-400/20 rounded-full blur-3xl`} />
+            <div className={`absolute -bottom-24 ${isRtl ? '-left-24' : '-right-24'} w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl`} />
           </div>
 
           <div className="relative z-10 max-w-3xl mx-auto">
@@ -27,40 +31,45 @@ const CTA = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/30 text-blue-50 border border-blue-400/30 mb-8 backdrop-blur-sm"
             >
               <Sparkles size={16} />
-              <span className="text-sm font-bold tracking-wide uppercase">Ready to scale?</span>
+              <span className="text-sm font-bold tracking-wide uppercase">
+                {t('cta.badge')}
+              </span>
             </motion.div>
 
             <h2 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight leading-[1.1]">
-              Transform your digital <br /> 
-              <span className="text-blue-200">presence today.</span>
+              {t('cta.title_main')} <br /> 
+              <span className="text-blue-200">{t('cta.title_sub')}</span>
             </h2>
             
-            <p className="text-lg md:text-xl text-blue-100 mb-12 leading-relaxed opacity-90">
-              Join 200+ companies growing their revenue with our data-driven 
-              MERN solutions and specialized SEO strategies.
+            <p className="text-lg md:text-xl text-blue-100 mb-12 leading-relaxed opacity-90 font-medium">
+              {t('cta.description')}
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 ${isRtl ? 'flex-row-reverse' : ''}`}>
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="group flex items-center gap-3 px-10 py-5 bg-white text-blue-600 rounded-2xl font-black text-lg shadow-xl hover:bg-blue-50 transition-all"
+                className="w-full sm:w-auto group flex items-center justify-center gap-3 px-10 py-5 bg-white text-blue-600 rounded-2xl font-black text-lg shadow-xl hover:bg-blue-50 transition-all"
               >
                 <Link to="/contact">  
-                Get a Free Consultation
+                  {t('cta.btn_consultation')}
                 </Link>
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                {isRtl ? (
+                  <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                ) : (
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                )}
               </motion.button>
               
-              <button className="px-10 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl font-bold text-lg hover:bg-white/10 transition-all">
+              <button className="w-full sm:w-auto px-10 py-5 bg-transparent text-white border-2 border-white/20 rounded-2xl font-bold text-lg hover:bg-white/10 transition-all">
                 <Link to="/services">
-                  View Pricing
+                  {t('cta.btn_pricing')}
                 </Link>
               </button>
             </div>
 
-            <p className="mt-8 text-blue-200/60 text-sm font-medium">
-              No credit card required • 15-minute discovery call
+            <p className="mt-8 text-blue-200/60 text-sm font-bold tracking-wide">
+              {t('cta.footer_note')}
             </p>
           </div>
         </motion.div>
